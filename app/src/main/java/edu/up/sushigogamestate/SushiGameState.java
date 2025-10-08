@@ -49,8 +49,8 @@ public class SushiGameState {
             //are pid's hand.  Replace other players' card with "UNKNOWN"
 
             ArrayList<String> myHandCopy = new ArrayList<String>();
-            hand.addAll(otherHand);
-            myHandCopy.add(hand);
+            //hand.addAll(otherHand);
+            //myHandCopy.add(hand);
         }
     }
 

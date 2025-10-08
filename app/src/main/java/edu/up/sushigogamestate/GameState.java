@@ -1,5 +1,7 @@
 package edu.up.sushigogamestate;
 
+import java.util.ArrayList;
+
 /**
  * SushiGoGameState
  *
@@ -9,25 +11,91 @@ package edu.up.sushigogamestate;
 public class GameState {
 
     // ----- Instance Variables -----
+
+    //deck of all cards
+    private ArrayList<String> deck = new ArrayList<>();
+
+    public static final String[] CARD_NAMES = {
+            "UNKNOWN",  //used to hide other player's cards
+            "EMPTY", //used to indicate an empty card slot in a players hand so it wont be null
+            "Sashimi",
+            "Tempura",
+            "Sashimi",
+            "Dumpling",
+            "Maki 1",
+            "Maki 2",
+            "Maki 3",
+            "Salmon Nigiri",
+            "Egg Nigiri",
+            "Squid Nigiri",
+            "Pudding",
+            "Wasabi",
+            "Chopsticks"};
+
     private int numPlayers;
-    private int currentPlayerId;
+
+    //private int currentPlayerId;
+
+    //array of booleans which says which players have chosen a card/are ready
+    private boolean[] readyPlayers;
+
     private boolean gameOver;
 
     private String[][] playerHands;     // Each player's current hand of cards
+
     private String[][] playerPlates;    // Cards each player has played
+
     private int[] playerScores;         // Each player's current score
 
+
+    //Helper method to populate deck (doesn't shuffle it yet)
+    public void populateDeck() {
+        //TO DO
+    }
+
     // ----- Constructor -----
+
+    /**
+     * Default constructor (takes no args, passes in default args to main constructor)
+     */
+    public GameState() {
+        new GameState(2);
+    }
+
+
     /**
      * Initializes the game state to the starting configuration.
      */
-    public GameState() {
-        numPlayers = 4;
-        currentPlayerId = 0;
+    public GameState(int numGamers) {
+        numPlayers = numGamers;
+        //currentPlayerId = 0;
         gameOver = false;
 
-        playerHands = new String[numPlayers][5];    // Each player starts with 5 cards
-        playerPlates = new String[numPlayers][10];  // Maximum of 10 cards on plate
+        //if incorrect num players arg is passed in, run game with default 2 players:
+        if(numPlayers > 5 || numPlayers < 2) {
+            numPlayers = 2;
+        }
+
+        int handSize = 0;
+        //determine number of cards in each hand based on number of players
+        //5 players = 7 cards, 4 = 8 cards, 3 = 9 cards, 2 = 10 cards
+        switch(numPlayers) {
+            case 2:
+                handSize = 10;
+                break;
+            case 3: handSize = 9;
+                break;
+
+            case 4:
+                handSize = 8;
+                break;
+            case 5:
+                handSize = 7;
+                break;
+        }
+
+        playerHands = new String[numPlayers][handSize];    // initialize player hands array holding max cards (hand size)
+        playerPlates = new String[numPlayers][handSize];  // up to the starting hand size card amount will end up played
         playerScores = new int[numPlayers];
 
         // Populate hands with example cards
