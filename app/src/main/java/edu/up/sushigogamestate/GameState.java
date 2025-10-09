@@ -163,10 +163,15 @@ public class GameState {
         playerPlates = new String[numPlayers][handSize];  // up to the starting hand size card amount will end up played
         playerScores = new int[numPlayers];
 
-        // Populate hands with example cards
+        //populate and shuffle deck arraylist
+        populateDeck(deck);
+        shuffleDeck(deck);
+
+        // Populate hands with cards from the deck
         for (int i = 0; i < numPlayers; i++) {
             for (int j = 0; j < 5; j++) {
-                playerHands[i][j] = "Card" + (j + 1);
+                //playerHands[i][j] = "Card" + (j + 1); example cards
+                playerHands[i][j] = deck.remove(deck.size()-1);
             }
             playerScores[i] = 0;
         }
