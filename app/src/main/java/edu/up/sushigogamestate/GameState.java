@@ -2,6 +2,8 @@ package edu.up.sushigogamestate;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Random;
 
 /**
  * SushiGoGameState
@@ -100,8 +102,6 @@ public class GameState {
                 }
             }
         }
-
-
     }
 
     /**
@@ -111,6 +111,11 @@ public class GameState {
      */
     public void shuffleDeck(ArrayList<String> deck) {
         //TODO josie
+        Random randy = new Random();
+        for(int i = 0; i < 108; i ++) { //run thru whole deck
+            int randIndex = randy.nextInt(108-i);
+            Collections.swap(deck, randIndex, 108);
+        }
     }
 
     // ----- Constructor -----
