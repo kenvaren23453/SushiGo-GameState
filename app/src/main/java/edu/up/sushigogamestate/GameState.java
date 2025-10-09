@@ -222,6 +222,7 @@ public class GameState {
      */
     @Override
     public String toString() {
+        // Gives "append" function
         StringBuilder sb = new StringBuilder();
         sb.append("=== Sushi Go Game State ===\n");
         sb.append("Number of Players: ").append(numPlayers).append("\n");
