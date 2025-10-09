@@ -20,8 +20,6 @@
         android:gravity="top"
         android:inputType="textMultiLine"
         android:text="@string/app_name"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp"
         app:layout_constraintBottom_toTopOf="@+id/runTestButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
