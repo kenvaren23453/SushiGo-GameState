@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         textOutput = findViewById(R.id.editTextText);
-        testButton = findViewById(R.id.button);
+        testButton = findViewById(R.id.runTestButton);
 
         testButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,8 +31,6 @@ public class MainActivity extends AppCompatActivity {
                 // Method for OnClick functionality
                 testButtonRun();
             }
-
-            // ok
 
         });
 
