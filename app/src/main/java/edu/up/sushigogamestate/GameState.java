@@ -1,6 +1,9 @@
 package edu.up.sushigogamestate;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Random;
 
 /**
  * SushiGoGameState
@@ -34,7 +37,8 @@ public class GameState {
 
     private int numPlayers;
 
-    private int currentPlayerId; //maybe rename to "thisPlayerId" or something since there aren't individual player turns?
+    private int currentPlayerId;
+    //could also be named actingPlayerId, thisPlayerId if worried about confusion since there are no turns
 
     //array of booleans which says which players have chosen a card/are ready
     private boolean[] readyPlayers;
@@ -48,9 +52,70 @@ public class GameState {
     private int[] playerScores;         // Each player's current score
 
 
-    //Helper method to populate deck (doesn't shuffle it yet)
-    public void populateDeck() {
-        //TO DO
+    /**
+     * Helper method to populate deck (doesn't shuffle it yet)
+     *
+     * There are 108 cards in a sushi go deck
+     * each card type is added to the deck the amount of times there are cards of that type in the deck
+     *
+     */
+    public void populateDeck(ArrayList<String> deck) {
+
+        //I definitely should have made a helper method to do this but oh well
+        for(int i = 0; i < 14; i ++) {
+            //there are 14 of each of the following card types in the deck. this loop adds them.
+            deck.add(CARD_NAMES[3]); //Tempura
+            deck.add(CARD_NAMES[4]); //Sashimi
+            deck.add(CARD_NAMES[5]); //Dumpling
+
+            //there are 12 double maki cards in the deck:
+            if(i < 12) {
+                deck.add(CARD_NAMES[7]); //Maki Roll 2
+
+                //there are 10 of these cards in the deck:
+                if(i < 10) {
+
+                    deck.add(CARD_NAMES[9]); //Salmon Nigiri
+                    deck.add(CARD_NAMES[12]); //Pudding
+
+                    //there are 8 triple maki cards in the deck:
+                    if (i < 8) {
+                        deck.add(CARD_NAMES[8]); // Maki Roll 3
+
+                        //there are 6 of these cards in the deck:
+                        if (i < 6) {
+                            deck.add(CARD_NAMES[13]); //Wasabi
+                            deck.add(CARD_NAMES[6]); //Maki Roll 1
+
+                            //there are 5 of these cards in the deck:
+                            if (i < 5) {
+                                deck.add(CARD_NAMES[11]); //Squid Nigiri
+                                deck.add(CARD_NAMES[10]); //Egg Nigiri
+
+                                //there are 4 chopsticks cards in the deck:
+                                if (i < 4) {
+                                    deck.add(CARD_NAMES[14]); //Chopsticks
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Shuffle Deck
+     *
+     * Reassigns each card in the given deck to a random location
+     */
+    public void shuffleDeck(ArrayList<String> deck) {
+        //TODO josie
+        Random randy = new Random();
+        for(int i = 0; i < 108; i ++) { //run thru whole deck
+            int randIndex = randy.nextInt(108-i);
+            Collections.swap(deck, randIndex, 108);
+        }
     }
 
     // ----- Constructor -----
@@ -105,6 +170,8 @@ public class GameState {
             }
             playerScores[i] = 0;
         }
+
+        //TODO copy deck how its currently shuffled??
     }
 
     /**
@@ -114,7 +181,33 @@ public class GameState {
      */
     public GameState(GameState other, int player) {
         GameState copyState = new GameState(other.numPlayers);
-        //TODO (josie working on this)
+
+        //copy simple instance variables (ints, bools, 1d arrays
+        copyState.currentPlayerId = other.currentPlayerId;
+        copyState.gameOver = other.gameOver;
+        copyState.readyPlayers = Arrays.copyOf(other.readyPlayers, other.readyPlayers.length);
+        copyState.playerHands = Arrays.copyOf(other.playerHands, other.playerHands.length);
+
+        //make other players hands unknown but keep this player's hand known to themself
+        for(int i = 0; i < copyState.playerHands.length; i ++) {
+            if (i != player) { //if opponent
+                for(int j = 0; j < copyState.playerHands[i].length; j ++) {
+                    if (!(copyState.playerHands[i][j].equals(CARD_NAMES[1]))) { //EMPTY
+                        //if its not an empty space in opponents hand, change it to unknown card to conceal their hand
+                        copyState.playerHands[i][j] = CARD_NAMES[0]; //UNKNOWN
+                    }
+                }
+            }
+        }
+
+        //copy all player plates. these are visible to everyone
+        for(int i = 0; i < other.numPlayers; i ++) {
+            copyState.playerPlates[i] = Arrays.copyOf(other.playerPlates[i], other.playerPlates[i].length);
+        }
+
+        //copy player scores. these are visible to everyone? because you could count anyones score by looking at their plate.
+        copyState.playerScores = Arrays.copyOf(other.playerScores, other.numPlayers);
+
     }
 
     // ----- toString() -----
