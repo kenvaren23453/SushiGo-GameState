@@ -34,7 +34,7 @@ public class GameState {
 
     private int numPlayers;
 
-    //private int currentPlayerId;
+    private int currentPlayerId; //maybe rename to "thisPlayerId" or something since there aren't individual player turns?
 
     //array of booleans which says which players have chosen a card/are ready
     private boolean[] readyPlayers;
@@ -105,6 +105,16 @@ public class GameState {
             }
             playerScores[i] = 0;
         }
+    }
+
+    /**
+     * Copy constructor
+     * Param: gamestate object
+     * makes a deep copy of the given gamestate in the pov of the given player
+     */
+    public GameState(GameState other, int player) {
+        GameState copyState = new GameState(other.numPlayers);
+        //TODO (josie working on this)
     }
 
     // ----- toString() -----
