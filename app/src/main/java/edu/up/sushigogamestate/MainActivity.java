@@ -11,6 +11,14 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+/**
+ * main activity
+ * sushi go
+ *
+ *
+ * @author Josephine, Maria, Tony, Kenzie
+ */
+
 public class MainActivity extends AppCompatActivity {
 
     private EditText textOutput;
@@ -85,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 appendLine("Second Instance:\n" + secondString + "\n");
-                appendLine("Third Instance:\n" + fourthString + "\n");
+                appendLine("Third Instance:\n" + fourthString + "\n"); //named third instance to match instructions
 
                 if(secondString.equals(fourthString))
                 {

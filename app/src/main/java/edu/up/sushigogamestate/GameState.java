@@ -6,7 +6,8 @@ import java.util.Collections;
 import java.util.Random;
 
 /**
- * SushiGoGameState
+ * GameState
+ * sushi go game state
  *
  *
  * @author Josephine, Maria, Tony, Kenzie
