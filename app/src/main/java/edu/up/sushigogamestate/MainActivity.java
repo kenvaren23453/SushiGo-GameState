@@ -25,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
         textOutput = findViewById(R.id.editTextText);
         testButton = findViewById(R.id.runTestButton);
 
-        testButton.setOnClickListener(new View.OnClickListener() {
+        testButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v) {
                 // Method for OnClick functionality
