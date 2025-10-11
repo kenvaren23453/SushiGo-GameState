@@ -79,17 +79,17 @@ public class MainActivity extends AppCompatActivity {
                 GameState fourthInstance = new GameState(thirdInstance, 0);
 
 
-
                 // Calls toString() on second and third instance
                 String secondString = secondInstance.toString();
                 String fourthString = fourthInstance.toString();
 
+
                 appendLine("Second Instance:\n" + secondString + "\n");
-                appendLine("Fourth Instance:\n" + fourthString + "\n");
+                appendLine("Third Instance:\n" + fourthString + "\n");
 
                 if(secondString.equals(fourthString))
                 {
-                    appendLine("Both second and fourth instance match!\n");
+                    appendLine("Both second and third instance match!\n");
                 }
                 else
                 {
