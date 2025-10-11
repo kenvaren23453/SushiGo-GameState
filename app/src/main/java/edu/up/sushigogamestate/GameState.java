@@ -318,6 +318,7 @@ public class GameState {
         for (String card : playerPlates[playerId]) {
             if ("Chopsticks".equals(card)) {
                 playerScores[playerId] += 1; // Example bonus
+                //TODO make chopsticks function how they should in the final game!
                 return true;
             }
         }
@@ -355,8 +356,23 @@ public class GameState {
      */
     public boolean passHands() {
         //TODO check if all players are ready otherwise return false
-        String[] placeholder = new String[playerHands[0].length];
-        //playerHands[0]
+
+        //put the last player's hand in a placeholder so we can give it to the first player at the end
+        String[] placeholder = new String[playerHands[numPlayers - 1].length];
+        placeholder = Arrays.copyOf(playerHands[numPlayers - 1], playerHands[numPlayers - 1].length);
+
+
+
+        for(int i = numPlayers - 1; i >= 0; i --) {
+            if(i == 0) { // if its the first player, give them the last player's hand we saved earlier.
+                playerHands[i] = Arrays.copyOf(placeholder, playerHands[0].length);
+            }
+            else { //otherwise, copy the previous persons hand into this 'i'th one
+                playerHands[i] = Arrays.copyOf(playerHands[i-1], playerHands[i-1].length);
+            }
+        }
+
+
         return true;
     }
 

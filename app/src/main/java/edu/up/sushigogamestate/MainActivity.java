@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                // Clears first line -> setText
+                // Clears the edit text when button is re-pressed
                 textOutput.setText("");
 
                 GameState firstInstance = new GameState();
@@ -59,30 +59,40 @@ public class MainActivity extends AppCompatActivity {
                 appendLine(firstInstance.toString() + "\n");
 
                 // MOVE 3 ---
-                appendLine("Move 3: Can be anything.\n");
+                firstInstance.passHands();
+                appendLine("Move 3: Players pass their hands to each other!!.\n");
                 // Action <---
-                appendLine(firstString + "\n");
+                appendLine(firstInstance.toString() + "\n");
 
                 // Finished with all 3 moves
                 appendLine("=== | Finished Testing! | ===\n");
 
-                // Create a third instance (object of GameState)
+                //create a new game gamestate called third instance
                 GameState thirdInstance = new GameState();
 
+                // Create a fourth instance which is a copy of third instance, a new game state
+                //this is for checking that the copy ctor works correctly
+                //it should match second instance, which is also a copy of a new game from same player perspective
+                //the rng for the hands is seeded for this so they should match exactly, allowing us to
+                //simply compare their toString outputs to make sure they match, verifying copy ctor works
+                GameState fourthInstance = new GameState(thirdInstance, 0);
+
+
+
                 // Calls toString() on second and third instance
-                String secondInstant = secondInstance.toString();
-                String thirdInstant = thirdInstance.toString();
+                String secondString = secondInstance.toString();
+                String fourthString = fourthInstance.toString();
 
-                appendLine("Second Instance:\n" + secondInstant + "\n");
-                appendLine("Third Instance:\n" + thirdInstant + "\n");
+                appendLine("Second Instance:\n" + secondString + "\n");
+                appendLine("Fourth Instance:\n" + fourthString + "\n");
 
-                if(secondInstant.equals(thirdInstant))
+                if(secondString.equals(fourthString))
                 {
-                    appendLine("Both second and third instance match!\n");
+                    appendLine("Both second and fourth instance match!\n");
                 }
                 else
                 {
-                    appendLine("Second and third instance do NOT match\n");
+                    appendLine("Second and fourth instance do NOT match\n");
                 }
             }
 
