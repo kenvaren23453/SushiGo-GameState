@@ -355,7 +355,7 @@ public class GameState {
      */
     public boolean passHands() {
         //TODO check if all players are ready otherwise return false
-        String[] placeholder = new String[]
+        String[] placeholder = new String[playerHands[0].length];
         //playerHands[0]
         return true;
     }
